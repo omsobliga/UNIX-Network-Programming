@@ -13,7 +13,6 @@ def main():
     s.connect((HOST, PORT))
     time.sleep(5)
     s.sendall('Hello, world')
-    s.sendall('Hello, world')
     data = s.recv(1024)
     print 'Received', repr(data)
     time.sleep(5)
