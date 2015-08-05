@@ -4,12 +4,16 @@
 """
 Multiple process server.
 Fork one process after accept a connection.
+Deal with SIGCHLD signo when child process exit.
 
 Output::
 
-    Connected by  ('127.0.0.1', 53494)
-    Connected by  ('127.0.0.1', 53495)
-    Connected by  ('127.0.0.1', 53496)
+    Connected by ('127.0.0.1', 59088)
+    Child 43712 terminated
+    socket.error: [Errno 4] Interrupted system call
+    Connected by ('127.0.0.1', 59091)
+    Child 43736 terminated
+    socket.error: [Errno 4] Interrupted system call
 """
 
 import os
@@ -31,7 +35,8 @@ def main():
     while True:
         try:
             conn, addr = s.accept()
-        except socket.error:  # Deal with slow system call
+        except socket.error as e:  # Deal with slow system call
+            print 'socket.error: {}'.format(e)
             continue
 
         print 'Connected by {}'.format(addr)
