@@ -14,7 +14,7 @@ print::
 import socket
 
 HOST = ''
-PORT = 50007
+PORT = 50008
 LISTENNQ = 5
 
 

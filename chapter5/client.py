@@ -5,7 +5,7 @@ import socket
 import time
 
 HOST = ''
-PORT = 50007
+PORT = 50008
 
 
 def main():

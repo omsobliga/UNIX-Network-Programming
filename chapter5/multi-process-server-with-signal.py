@@ -22,7 +22,7 @@ import socket
 import sys
 
 HOST = ''
-PORT = 50007
+PORT = 50008
 LISTENNQ = 5
 
 
@@ -45,6 +45,7 @@ def main():
             str_echo(conn)
             conn.close()  # Close connected fd
             sys.exit(0)  # Clild process terminates
+
         conn.close()
 
 

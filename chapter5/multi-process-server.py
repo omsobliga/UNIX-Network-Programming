@@ -17,7 +17,7 @@ import socket
 import sys
 
 HOST = ''
-PORT = 50007
+PORT = 50008
 LISTENNQ = 5
 
 
