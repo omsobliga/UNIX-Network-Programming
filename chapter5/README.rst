@@ -54,7 +54,9 @@
   PID  PPID TTY      STAT ARGS                           WCHAN
   22098 18210 ttys001  S+   python multi-process-server.py -
 
-不再有 ``Z+`` 僵死的子进程，在编写网络编程时需要注意：
+可以看到不再有 ``Z+`` 僵死的子进程。
+
+在编写网络编程时需要注意：
 
 1. 当 fork 子进程时，必须捕获 SIGCHLD 信号；
 2. 当捕获信号时，必须处理被中断的系统调用；（slow system call）
@@ -101,7 +103,7 @@ QA
 ``
 
 1. 为什么子进程 exit 之后不直接回收资源，而需要发送 SIGCHLD 通知父进程进行回收？
-2. signal handler 和 slow system call 是如何相互影响的？
+2. signal handler 和 slow system call 是如何相互影响的？也就是为什么有了 signal 之后需要对 socket.error 进行捕获？
 
 
 Reference:
