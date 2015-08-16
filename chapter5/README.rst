@@ -98,13 +98,13 @@
    触发 socket.error 异常，随后重启 accept 继续进入阻塞状态。
    （TODO：具体为什么会在 accept 中触发 socket.error 异常还不清楚）
 
-
 QA
 ``
 
 1. 为什么子进程 exit 之后不直接回收资源，而需要发送 SIGCHLD 通知父进程进行回收？
 2. signal handler 和 slow system call 是如何相互影响的？也就是为什么有了 signal 之后需要对 socket.error 进行捕获？
 
+TODO
+````
 
-Reference:
-``````````
+1. 程序健壮性有待测试，比如一个 server 处理多个 client 时候出现大量 `Child 0 terminated`。

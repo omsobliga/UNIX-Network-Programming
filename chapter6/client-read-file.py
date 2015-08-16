@@ -29,7 +29,7 @@ def str_cli(_socket):
         for r in readable:
             if r is read_fd:  # file is readable
                 data = read_fd.readline()
-                if stdineof:  # read eof
+                if stdineof:  # has read eof
                     continue
                 if not data:  # first read eof
                     print 'End input.'

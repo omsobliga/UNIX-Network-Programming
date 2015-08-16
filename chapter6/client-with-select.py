@@ -23,25 +23,27 @@ def main():
 def str_cli(_socket):
     stdineof = False
     while True:
-        readable, writable, exceptional = select.select([sys.stdin, _socket], [], [], 1)
-        for r in readable:
+        rlist, wlist, xlist = select.select([sys.stdin, _socket], [], [], 1)
+        for r in rlist:
             if r is sys.stdin:  # input is readable
                 data = sys.stdin.readline()[:-1]
+                if stdineof:  # has read eof
+                    continue
                 if not data:
                     print 'End input.'
                     stdineof = True
-                    _socket.shutdown(socket.SHUT_WR)  # send FIN, if continue to send data will make error
+                    _socket.shutdown(socket.SHUT_WR)  # send FIN
                 else:
                     _socket.sendall(data)
             elif r is _socket:  # socket is readable
                 data = _socket.recv(1024)
-                if stdineof:
-                    print 'Normal termination'
-                    return
-                elif not data:
+                if not data:
                     print 'Server terminated prematurely'
                     sys.exit(0)
                 print 'Received', repr(data)
+
+        if stdineof:  # end
+            return
 
 
 if __name__ == '__main__':
