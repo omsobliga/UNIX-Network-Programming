@@ -2,7 +2,7 @@ I/O 复用
 ========
 
 chapter5 的程序都存在一个问题，客户端因为阻塞与 stdin.readline() 期间，如果服务
-器进程被杀死。 
+器进程被杀死。
 
 **TCP 服务器虽然正确给客户发送一个 FIN，但客户进程正阻塞与从标准输入读入的过程，
 它无法看到 FIN，直到从套接字读时为止（可能过了很长时间）。
@@ -11,8 +11,8 @@ chapter5 的程序都存在一个问题，客户端因为阻塞与 stdin.readlin
 
 下面主要实现 I/O 复用的两种场景：
 
-- 当客户处理多个描述符（通常是交互式输入和网络套接字）。
-- TCP 服务器即需要处理监听套接字，又需要处理已连接套接字。
+- **当客户处理多个描述符（通常是交互式输入和网络套接字）。**
+- **TCP 服务器即需要处理监听套接字，又需要处理已连接套接字。**
 
 这两种情况，下面都有实现，分别对应： ``client-with-select.py`` 和 ``server-with-select.py`` 。
 
@@ -51,3 +51,12 @@ TODO
 
 - select 中 wlist 和 xlist 的使用。
 - poll 服务端模型。
+
+Ref:
+----
+
+- http://ilab.cs.byu.edu/python/select/echoserver.html
+- http://pymotw.com/2/select/
+- https://docs.python.org/2/library/select.html
+- http://www.cnblogs.com/Anker/p/3265058.html
+- http://blog.csdn.net/lizhiguo0532/article/details/6568964

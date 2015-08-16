@@ -107,4 +107,9 @@ QA
 TODO
 ````
 
-1. 程序健壮性有待测试，比如一个 server 处理多个 client 时候出现大量 `Child 0 terminated`。
+1. 程序健壮性有待测试，比如一个 server 处理多个 client 时候出现大量 ``Child 0 terminated`` 。
+
+Ref:
+----
+
+- https://docs.python.org/2/library/socket.html
