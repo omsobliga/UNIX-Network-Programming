@@ -10,7 +10,7 @@ I/O 复用的主要实现是 select 和 poll。
 select 客户端模型
 -----------------
 
-运行程序::
+client 从控制台读数据，运行程序::
 
     > python server-with-socket.py | python client.py
 
@@ -18,8 +18,15 @@ select 客户端模型
 
     > Server terminated prematurely
 
+client 读写文件，运行程序::
+
+    > python server-with-socket.py | python client-read-file.py
+
+然后关闭 server，client 会输出::
+
+    > End input.
+    > Server terminated prematurely
+
 
 TODO
 ----
-
-- shutdown 怎么测试生效？

@@ -5,6 +5,7 @@
 Refelecting client
 """
 
+import sys
 import socket
 
 HOST = ''
@@ -20,9 +21,12 @@ def main():
 
 def str_cli(_socket):
     while True:
-        data = raw_input('> ')
-        if not data:
+        try:
+            data = sys.stdin.readline()
+        except KeyboardInterrupt:
+            print 'End input'
             break
+
         _socket.sendall(data)
         data = _socket.recv(1024)
         print 'Received', repr(data)
