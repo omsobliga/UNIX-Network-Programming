@@ -21,3 +21,12 @@ chapter6
 - I/O 复用：select 和 poll 函数。
 
   - select 分别实现 client 和 server
+
+chapter16
+``````````
+
+- 非阻塞 I/O
+
+  - 非阻塞 read/write
+  - 非阻塞 connect
+  - 非阻塞 accept

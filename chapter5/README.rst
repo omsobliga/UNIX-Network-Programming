@@ -102,6 +102,7 @@ QA
 ``
 
 1. 为什么子进程 exit 之后不直接回收资源，而需要发送 SIGCHLD 通知父进程进行回收？
+   os.kill(os.getpid(), signal.SIGTERM)  还是会有同样的问题。
 2. signal handler 和 slow system call 是如何相互影响的？也就是为什么有了 signal 之后需要对 socket.error 进行捕获？
 
 TODO
