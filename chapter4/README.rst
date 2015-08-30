@@ -8,8 +8,8 @@ socket 函数
 
 创建新的套接字。
 
-family 表示套接字采用什么协议，其中：socket.AF_INET 表示 IPv4。
-type 表示套接字类型，其中：SOCK_STREAM 表示字节流套接字。
+* family 表示套接字采用什么协议，其中：socket.AF_INET 表示 IPv4。
+* type 表示套接字类型，其中：SOCK_STREAM 表示字节流套接字。
 
 connect 函数
 ------------
