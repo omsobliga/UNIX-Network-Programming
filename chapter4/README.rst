@@ -53,5 +53,14 @@ close 函数
 `socket.close()`
 
 把该套接字标记成关闭，该套接字描述符不能再被调用进程使用，即：read/write。
-如果在并发服务器中使用只是导致相应描述符的引用计数值减 1， 如果引用计数值仍大于 0，
-这个 close 调用不会引发 TCP 的四分组连接终止序列。意味着改套接字在其他进程中仍可被正常使用。
+**如果在并发服务器中使用只是导致相应描述符的引用计数值减 1， 如果引用计数值仍大于 0，
+这个 close 调用不会引发 TCP 的四分组连接终止序列。意味着改套接字在其他进程中仍可被正常使用。**
+
+shutdown 函数
+-------------
+
+`socket.shutdown(how)`
+
+对套接字只关闭读或写，或者读写都关闭。分别对应参数： `SHUT_RD` `SHUT_WR` `SHUT_RDWR` 。
+
+关于 close 和 shutdown 的比较，参考： `socket close vs shutdown <../others/close-vs-shutdown>`_
