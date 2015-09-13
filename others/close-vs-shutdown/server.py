@@ -5,7 +5,6 @@
 Single process server.
 """
 
-import time
 import socket
 
 HOST = ''
@@ -21,7 +20,6 @@ def main():
         conn, addr = s.accept()
         print 'Connected by ', addr
         while True:
-            time.sleep(10)
             data = conn.recv(1024)
             print 'success recv'
             print 'data: {}'.format(data)

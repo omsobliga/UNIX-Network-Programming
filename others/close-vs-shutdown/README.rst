@@ -118,8 +118,19 @@ tcp 连接状态与 `程序 1` 完全一致。
 
 - client 在调用 socket.close() 之后，无法再对 socket 进行操作（其实是因为描述符计数值为零）。
   server 在 client 发生 socket.close() 之后正常执行了 send/recv 操作，所以 **close 不会影响对端套接字的使用情况** 。
-- 当只知道套接字读/写的某一个状态时，比如确定读操作完成，但写操作可能还没完成，这个时候就只能通过 shutdown 来关闭，
-  因此 shutdown 在 I/O 复用场景中应用会比较多（I/O 复用中需要程序区分处理「可读/可写」事件）。
+
+使用建议
+--------
+
+..
+
+    1. Always shutdown before close when possible.
+    2. If you finished receiving (0 size data received) before shutdown,
+       close the connection after the last send finishes.
+    3. If you want to close the connection normally, shutdown the connection,
+       and wait until you receive a 0 size data, and then close the socket.
+    4. In any case, if timed out or any other error occured simply close the socket.
+
 
 其他
 ----
@@ -127,3 +138,9 @@ tcp 连接状态与 `程序 1` 完全一致。
 有一处需要注意的是，输出中有两个同样的 TCP 四元组，即： `(localhost.50008, localhost.55553)` 。
 有时候状态还不一样，比如： `FIN_WAIT2` `CLOSE_WAIT` 。
 我的理解是它们都是同一个 tcp 连接，只不过一个是 client 角度，一个是 server 角度。
+
+Reference:
+----------
+
+- http://stackoverflow.com/questions/4160347/close-vs-shutdown-socket#comment4491371_4160356
+- http://stackoverflow.com/a/26877667/3175815

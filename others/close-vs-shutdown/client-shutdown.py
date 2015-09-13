@@ -19,11 +19,10 @@ def main():
 
     time.sleep(5)
     data = s.recv(1024)
+    print 'Received', repr(data)
 
     s.shutdown(socket.SHUT_RD)
-    print 'shut_rd'
-    time.sleep(5)
-    print 'Received', repr(data)
+    s.close()
 
 
 if __name__ == '__main__':
