@@ -35,11 +35,6 @@ client 输出:
       raise error(EBADF, 'Bad file descriptor')
     socket.error: [Errno 9] Bad file descriptor
 
-因此：
-
-* client 在调用 socket.close() 之后，无法再对 socket 进行操作（其实是描述符计数值为零）。
-* server 在 client 发生 socket.close() 之后正常执行了 send/recv 操作，所以 *close 不会影响对端套接字的使用情况* 。
-
 运行过程中 tcp 的连接状态:
 
     > lihang@lihang.aws.dev:~$ netstat -a | grep 50008
@@ -59,10 +54,7 @@ client 输出:
     > lihang@lihang.aws.dev:~$ netstat -a | grep 50008
     tcp        0      0 *:50008                 *:*                     LISTEN
 
-
 ### 运行程序 2
-
-::
 
   $ python multi-process-server.py | python client-shutdown.py
 
@@ -71,7 +63,6 @@ server 输出结果与 `程序 1` 结果一致。
 client 输出:
 
     shut_wr
-    shut_rd
     Received 'Hello, world'
 
 tcp 连接状态也与 `程序 1` 完全一致。
