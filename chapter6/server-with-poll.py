@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Select server.
+select server.
 
-Simple 版本，没有对 writable 状态做处理。
+TODO: use wlist
 """
 
 import select
@@ -42,7 +42,7 @@ def str_echo(rlist, conn):  # Process the request
         rlist.remove(conn)
         conn.close()
     else:
-        conn.sendall(data)  # Should call when wlist is not empty
+        conn.sendall(data)
 
 
 if __name__ == '__main__':
