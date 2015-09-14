@@ -25,11 +25,13 @@ def main():
     while True:
         conn, addr = s.accept()
         print 'Connected by ', addr
-        data = conn.recv(1024)
-        if not data:
-            break
-        conn.sendall(data)
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
         conn.close()
+    s.close()
 
 
 if __name__ == '__main__':
