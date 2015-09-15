@@ -30,28 +30,39 @@ I/O 复用的主要实现是 select 和 poll。
 
 ## select 服务端模型
 
-``server-with-socket.py`` 中主程序会阻塞在 accept() 函数，直到有 **已连接套接字** 可用。
+* `server-with-socket.py` 中主程序会阻塞在 accept() 函数，直到有 **已连接套接字** 可用。
 
-``server-with-select.py`` 中程序会阻塞在 select() 函数，**如果发现监听套接字
-（listenfd）就绪则创建新连接，发现已连接套接字（conn）就绪则进行数据传输**。
+* `server-with-select-completely.py` 中程序会阻塞在 select() 函数，
+  **如果发现监听套接字（listenfd）就绪则创建新连接，发现已连接套接字（conn）就绪则进行数据传输**。
 
 运行程序:
 
-    > python server-with-select.py | python client-with-select.py
+    > python server-with-select-completely.py | python client-with-select.py
+
+## poll 服务端模型
+
+* `server-with-poll.py` 实现逻辑与 select-server 基本相似，只是套接字的存储形式不一样。
+  需要在 Linux 环境下运行，Mac OS 没有 poll 环境。
 
 ## select vs poll 主要区别（C 语言版）
 
 - select 采用 bit mask（位掩码）记录 fd 的状态，因此有长度限制。（依赖系统）
 - poll 采用 pollfd array 记录 fd 状态，所以不再有长度限制。
 
+> poll() scales better because the system call only requires listing the file descriptors of interest,
+> while select() builds a bitmap, turns on bits for the fds of interest,
+> and then afterward the whole bitmap has to be linearly scanned again.
+> select() is O(highest file descriptor), while poll() is O(number of file descriptors).
+> From: https://docs.python.org/2/library/select.html#polling-objects
+
 ## TODO
 
-- poll 服务端模型。
+- epoll 服务端模型。
 
 ## Reference:
 
 - [Echo Server with Select](http://ilab.cs.byu.edu/python/select/echoserver.html)
-- [select – Wait for I/O Efficiently](http://pymotw.com/2/select/)  # 有一处错误，close() 应该在 writable 循环中进行。
+- [select – Wait for I/O Efficiently](http://pymotw.com/2/select/)  # socket.close() 逻辑有误。
 - [Python select library](https://docs.python.org/2/library/select.html)
 - [What are the differences between poll and select?](http://stackoverflow.com/questions/970979/what-are-the-differences-between-poll-and-select)
 - [epoll 或者 kqueue 的原理是什么？](http://www.zhihu.com/question/20122137/answer/14049112)
