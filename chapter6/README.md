@@ -63,7 +63,7 @@ I/O 复用的主要实现是：select、poll 和 epoll。
 
 ### poll vs epoll
 
-详细分析参见：[poll vs epoll](./poll-vs-epoll)
+详细分析参见：[poll vs epoll](../others/poll-vs-epoll)
 
 ## Reference:
 
@@ -71,6 +71,3 @@ I/O 复用的主要实现是：select、poll 和 epoll。
 - [select – Wait for I/O Efficiently](http://pymotw.com/2/select/)  # socket.close() 逻辑有误。
 - [Python select library](https://docs.python.org/2/library/select.html)
 - [What are the differences between poll and select?](http://stackoverflow.com/questions/970979/what-are-the-differences-between-poll-and-select)
-- [epoll 或者 kqueue 的原理是什么？](http://www.zhihu.com/question/20122137/answer/14049112)
-- [epoll(7) - Linux man page](http://linux.die.net/man/7/epoll)
-- [epoll 边缘触发和水平触发的区别](http://blog.himdd.com/archives/3289)
