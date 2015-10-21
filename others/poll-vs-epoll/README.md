@@ -95,3 +95,4 @@ select/poll/epoll 在 idle connection（空闲连接）比较少的时候差异�
 - [3] [epoll(7) - Linux man page](http://linux.die.net/man/7/epoll)
 - [4] [Comparing and Evaluating epoll, select, and poll Event Mechanisms](https://www.kernel.org/doc/ols/2004/ols2004v1-pages-215-226.pdf)  # 推荐：五星
 - [5] [Linux IO 模式及 select、poll、epoll详解](http://segmentfault.com/a/1190000003063859)  # 推荐：四星
+- [6] [Linux/fs/eventpoll.c](http://lxr.free-electrons.com/source/fs/eventpoll.c)
